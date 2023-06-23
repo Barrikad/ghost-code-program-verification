@@ -1,0 +1,62 @@
+
+method remainder() {
+    var x : Int
+    var y : Int
+    var z : Int := y
+    assume x >= 0
+    assume y >= 0
+    var g : Int := 0 //ghost
+
+    while (z >= x)
+    invariant g * x + z == y 
+    invariant exists q : Int :: q * x + z == y
+    {
+        z := z - x
+        g := g + 1 //ghost
+    }
+
+    assert exists q : Int :: q * x + z == y
+}
+
+
+method root() {
+    var x : Int
+    assume x >= 0
+    var a : Int := 0
+    var b : Int := x + 1
+    while (a + 1 != b)
+    invariant a * a <= x && b * b >= x
+    invariant a < b
+    {
+        var v : Int := b - a // ghost
+        var m : Int := (a + b) / 2
+        if (m * m <= x) {
+            a := m
+        } else {
+            b := m
+        }
+        assert v > b - a // ghost
+    }
+    assert a + 1 == b
+    assert a * a <= x
+    assert b * b >= x
+}
+
+function f(x: Int):Int
+requires x >= 0
+{
+    x > 0 ? x + f(x - 1) : 0
+}
+
+method induction() {
+    var x : Int
+    assume 0 <= x
+    var i : Int := 0 // ghost 
+    while (i < x) // ghost 
+    invariant 0 <= i && i <= x 
+    invariant f(i) == (i * (i + 1)) / 2
+    {
+        i := i + 1 // ghost 
+    }
+    assert f(x) == (x * (x + 1)) / 2
+}
