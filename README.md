@@ -2,7 +2,7 @@
 The main content of this repository is an Isabelle framework for typing ghost code for program verification. The project is associated with my Master's Thesis "Mechanized Ghost Code and
 Weakest Precondition Reasoning".
 
-# Overview of the different files:
+# Overview of the different files
 - *WPG*: This folder contains a Haskell project for typing and verifying PL0 programs.
 - *ghost-code.vpr*: Examples of programs with ghost code in the MicroViper language.
 - *pexp.thy*: Definitions and lemmas related to arithmetic expressions and logical formulas.
